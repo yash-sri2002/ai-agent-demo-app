@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InputField } from "../components/InputField.js";
 import { Button } from "../components/Button.js";
 import { login, AuthError } from "../services/AuthService.js";
+import { DASHBOARD_STORAGE_KEY } from "./Dashboard.js";
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,9 @@ export function LoginPage() {
   async function handleLogin(): Promise<void> {
     setError(null);
     try {
-      await login({ email, password });
+      const user = await login({ email, password });
+      window.localStorage.setItem(DASHBOARD_STORAGE_KEY, JSON.stringify(user));
+      window.location.assign("/dashboard");
     } catch (err) {
       setError(err instanceof AuthError ? err.message : "Something went wrong.");
     }
