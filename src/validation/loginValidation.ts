@@ -4,7 +4,7 @@ export interface ValidationResult {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MIN_PASSWORD_LENGTH = 8;
+const MIN_PASSWORD_LENGTH = 16;
 
 export function validateLoginCredentials(email: string, password: string): ValidationResult {
   const errors: string[] = [];
