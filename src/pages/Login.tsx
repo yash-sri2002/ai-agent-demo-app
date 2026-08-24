@@ -32,7 +32,7 @@ export function LoginPage() {
         onChange={setPassword}
       />
       {error && <p className="error-message">{error}</p>}
-      <Button id="loginBtn" label="Log In" onClick={handleLogin} />
+      <Button id="loginBtn" label="Sign In" onClick={handleLogin} />
     </div>
   );
 }
