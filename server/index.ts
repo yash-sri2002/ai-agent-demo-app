@@ -1,7 +1,7 @@
 /**
- * Minimal backend for the demo app's login flow. In-memory only - this is
- * a fixture for testing automation-impact-agent, not a real auth system
- * (no hashing, no session store, one hardcoded user).
+ * Minimal backend for the demo app. In-memory only - this is a fixture
+ * for testing automation-impact-agent, not a real system (no hashing, no
+ * session store, no persistence across restarts).
  */
 import express from "express";
 
@@ -32,6 +32,24 @@ app.post("/api/users/login", (req, res) => {
     user: { id: user.id, email: user.email, displayName: user.displayName },
     token: `demo-token-${user.id}`,
   });
+});
+
+app.put("/api/users/profile", (req, res) => {
+  const { userId, displayName } = req.body ?? {};
+  const user = users.find((candidate) => candidate.id === userId);
+
+  if (!user) {
+    res.status(404).json({ message: "User not found." });
+    return;
+  }
+
+  if (typeof displayName !== "string" || displayName.trim().length === 0) {
+    res.status(400).json({ message: "Display name must not be empty." });
+    return;
+  }
+
+  user.displayName = displayName.trim();
+  res.json({ id: user.id, email: user.email, displayName: user.displayName });
 });
 
 const port = Number(process.env.PORT ?? 4000);

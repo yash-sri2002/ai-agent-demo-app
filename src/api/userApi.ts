@@ -25,3 +25,19 @@ export async function loginRequest(credentials: LoginCredentials): Promise<Login
 
   return response.json() as Promise<LoginResponse>;
 }
+
+/** Updates a user's display name. Thrown errors carry the backend's message. */
+export async function updateProfileRequest(userId: string, displayName: string): Promise<User> {
+  const response = await fetch(`${API_BASE_URL}/profile`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, displayName }),
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({ message: "Profile update failed." }));
+    throw new Error(body.message ?? "Profile update failed.");
+  }
+
+  return response.json() as Promise<User>;
+}

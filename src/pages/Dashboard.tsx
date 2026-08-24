@@ -20,6 +20,9 @@ export function DashboardPage() {
     <div className="dashboard-page">
       <h1>Dashboard</h1>
       <p className="welcome-message">Welcome, {user?.displayName ?? "Guest"}.</p>
+      <a id="editProfileLink" href="/profile">
+        Edit Profile
+      </a>
     </div>
   );
 }
