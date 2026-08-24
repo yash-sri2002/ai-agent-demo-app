@@ -45,7 +45,7 @@ export function ProfilePage() {
         onChange={setDisplayName}
       />
       {message && <p className="profile-message">{message}</p>}
-      <Button id="saveProfileBtn" label="Save" onClick={handleSave} />
+      <Button id="saveChangesBtn" label="Save" onClick={handleSave} />
     </div>
   );
 }
