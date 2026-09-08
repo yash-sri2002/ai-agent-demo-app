@@ -39,13 +39,55 @@ body {
   border-bottom: 1px solid #e2e5e9;
 }
 
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .top-bar-home {
   font-weight: 600;
   color: #1e3a8a;
 }
 
+.domain-selector {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+
 .top-bar-user {
   color: #475569;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .app-body {
