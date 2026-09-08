@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import type { User } from "../types/user.js";
 import type { Domain } from "../types/domain.js";
 import { Layout } from "../components/Layout.js";
-import { listDomains } from "../api/domainApi.js";
+import { deleteDomain, listDomains } from "../api/domainApi.js";
 import { DASHBOARD_STORAGE_KEY } from "./Dashboard.js";
 
 function readLoggedInUser(): User | null {
@@ -30,6 +30,14 @@ export function DomainsListPage() {
   const filtered = domains.filter((domain) =>
     domain.name.toLowerCase().includes(search.toLowerCase()),
   );
+
+  async function handleDelete(domain: Domain): Promise<void> {
+    if (!window.confirm(`Delete domain "${domain.name}"? This cannot be undone.`)) {
+      return;
+    }
+    await deleteDomain(domain.id);
+    setDomains((current) => current.filter((existing) => existing.id !== domain.id));
+  }
 
   return (
     <Layout user={user}>
@@ -59,6 +67,7 @@ export function DomainsListPage() {
                 <th>Domain Name</th>
                 <th>Status</th>
                 <th>Created</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +80,22 @@ export function DomainsListPage() {
                     </span>
                   </td>
                   <td>{new Date(domain.createdAt).toLocaleDateString()}</td>
+                  <td className="domain-actions">
+                    <button type="button" className="icon-button" aria-label={`View ${domain.name}`}>
+                      👁
+                    </button>
+                    <button type="button" className="icon-button" aria-label={`Edit ${domain.name}`}>
+                      ✏️
+                    </button>
+                    <button
+                      type="button"
+                      className="icon-button icon-button-danger"
+                      aria-label={`Delete ${domain.name}`}
+                      onClick={() => void handleDelete(domain)}
+                    >
+                      🗑
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

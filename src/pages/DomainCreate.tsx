@@ -98,7 +98,7 @@ export function DomainCreatePage() {
           <a href="/domains" id="cancelDomainBtn" className="button-secondary">
             Cancel
           </a>
-          <button id="createDomainBtn" className="button-primary" onClick={handleCreate}>
+          <button id="saveDomainBtn" className="button-primary" onClick={handleCreate}>
             Create Domain
           </button>
         </div>

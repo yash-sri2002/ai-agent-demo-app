@@ -28,3 +28,12 @@ export async function createDomain(input: CreateDomainInput): Promise<Domain> {
 
   return response.json();
 }
+
+export async function deleteDomain(id: string): Promise<void> {
+  const response = await fetch(`/api/domains/${id}`, { method: "DELETE" });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.message ?? "Failed to delete domain.");
+  }
+}
