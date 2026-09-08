@@ -16,6 +16,23 @@ const users: StoredUser[] = [
   { id: "u1", email: "test.user@example.com", password: "SuperSecret123", displayName: "Test User" },
 ];
 
+interface StoredDomain {
+  id: string;
+  name: string;
+  status: "Active" | "Inactive";
+  createdAt: string;
+}
+
+const domains: StoredDomain[] = [
+  { id: "d1", name: "example.com", status: "Active", createdAt: new Date("2026-08-01").toISOString() },
+  {
+    id: "d2",
+    name: "staging.example.com",
+    status: "Inactive",
+    createdAt: new Date("2026-08-15").toISOString(),
+  },
+];
+
 const app = express();
 app.use(express.json());
 
@@ -50,6 +67,33 @@ app.put("/api/users/profile", (req, res) => {
 
   user.displayName = displayName.trim();
   res.json({ id: user.id, email: user.email, displayName: user.displayName });
+});
+
+app.get("/api/domains", (_req, res) => {
+  res.json(domains);
+});
+
+app.post("/api/domains", (req, res) => {
+  const { name, status } = req.body ?? {};
+
+  if (typeof name !== "string" || name.trim().length === 0) {
+    res.status(400).json({ message: "Domain name is required." });
+    return;
+  }
+
+  if (domains.some((existing) => existing.name === name.trim())) {
+    res.status(409).json({ message: "A domain with this name already exists." });
+    return;
+  }
+
+  const domain: StoredDomain = {
+    id: `d${domains.length + 1}`,
+    name: name.trim(),
+    status: status === "Inactive" ? "Inactive" : "Active",
+    createdAt: new Date().toISOString(),
+  };
+  domains.push(domain);
+  res.status(201).json(domain);
 });
 
 const port = Number(process.env.PORT ?? 4000);

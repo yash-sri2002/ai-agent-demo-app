@@ -1,5 +1,6 @@
 import React from "react";
 import type { User } from "../types/user.js";
+import { Layout } from "../components/Layout.js";
 
 const STORAGE_KEY = "demoLoggedInUser";
 
@@ -17,13 +18,15 @@ export function DashboardPage() {
   const user = readLoggedInUser();
 
   return (
-    <div className="dashboard-page">
-      <h1>Dashboard</h1>
-      <p className="welcome-message">Welcome, {user?.displayName ?? "Guest"}.</p>
-      <a id="editProfileLink" href="/profile">
-        Edit Profile
-      </a>
-    </div>
+    <Layout user={user}>
+      <div className="dashboard-page">
+        <h1>Dashboard</h1>
+        <p className="welcome-message">Welcome, {user?.displayName ?? "Guest"}.</p>
+        <a id="editProfileLink" href="/profile">
+          Edit Profile
+        </a>
+      </div>
+    </Layout>
   );
 }
 
