@@ -275,3 +275,13 @@ th {
 .error-message {
   color: #b91c1c;
 }
+
+
+.domain-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.icon-button-danger {
+  color: #b91c1c;
+}

@@ -96,6 +96,18 @@ app.post("/api/domains", (req, res) => {
   res.status(201).json(domain);
 });
 
+app.delete("/api/domains/:id", (req, res) => {
+  const index = domains.findIndex((domain) => domain.id === req.params.id);
+
+  if (index === -1) {
+    res.status(404).json({ message: "Domain not found." });
+    return;
+  }
+
+  domains.splice(index, 1);
+  res.status(204).send();
+});
+
 const port = Number(process.env.PORT ?? 4000);
 app.listen(port, () => {
   // eslint-disable-next-line no-console
