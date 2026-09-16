@@ -40,7 +40,7 @@ jobs:
       - name: Install Claude Code CLI (headless mode)
         run: npm install -g @anthropic-ai/claude-code
 
-      - name: Run impact analysis
+      - name: Run impact analysis and open a draft PR with the fix
         working-directory: agent
         env:
           GITHUB_TOKEN: ${{ secrets.AGENT_GITHUB_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
           AUTOMATION_REPO_OWNER: yash-sri2002
           AUTOMATION_REPO_NAME: ai-agent-demo-automation
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: npx tsx scripts/analyze-pr.ts ${{ github.event.pull_request.number }} --output ../report.md
+        run: npx tsx scripts/analyze-pr.ts ${{ github.event.pull_request.number }} --create-draft-pr --output ../report.md
 
       - name: Post report as a PR comment
         uses: actions/github-script@v7
