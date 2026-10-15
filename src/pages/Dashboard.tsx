@@ -1,8 +1,9 @@
 import React from "react";
 import type { User } from "../types/user.js";
 import { Layout } from "../components/Layout.js";
+import { LOGGED_IN_USER_KEY } from "../services/session.js";
 
-const STORAGE_KEY = "demoLoggedInUser";
+const STORAGE_KEY = LOGGED_IN_USER_KEY;
 
 function readLoggedInUser(): User | null {
   const raw = window.localStorage.getItem(STORAGE_KEY);
