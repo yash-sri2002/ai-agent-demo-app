@@ -13,7 +13,6 @@ body {
   color: #1a1a2e;
 }
 
-.login-page,
 .profile-page {
   max-width: 360px;
   margin: 80px auto;
@@ -21,6 +20,171 @@ body {
   background: white;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Login page ----------
+   Everything is scoped under .login-page so the shared InputField / button
+   styling on Profile and Domains stays as it was. */
+
+body:has(.login-page) {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.35), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.35), transparent 45%),
+    linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #1d4ed8 100%);
+}
+
+.login-page {
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  padding: 40px 36px 36px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+}
+
+.login-page::before {
+  content: "AI";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.login-page h1 {
+  margin: 0 0 28px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.login-page h1::after {
+  content: "Welcome back! Please sign in to continue.";
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.login-page .input-field {
+  margin-bottom: 18px;
+}
+
+.login-page .input-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.login-page .input-field input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #0f172a;
+  background: #f8fafc;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.login-page .input-field input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+}
+
+.login-page > button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  transition: transform 0.1s, box-shadow 0.15s, filter 0.15s;
+}
+
+.login-page > button:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+}
+
+.login-page > button:active {
+  transform: translateY(1px);
+}
+
+.login-page .error-message {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+  font-size: 13px;
+}
+
+/* Remember me / Forgot password row and reset help - styled ahead of the
+   demo PR that adds them, so they look finished as soon as it's merged. */
+.login-page .login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.login-page .login-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.login-page .login-options input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.login-page .login-options a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-page .login-options a:hover {
+  text-decoration: underline;
+}
+
+.login-page .info-message {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1e40af;
+  font-size: 13px;
 }
 
 .app-shell {
